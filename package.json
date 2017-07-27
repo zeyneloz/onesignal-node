@@ -1,0 +1,33 @@
+{
+  "name": "onesignal-node",
+  "version": "0.0.1",
+  "description": "A Node.js Library for OneSignal push notification service",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KolektifLabs/onesignal-node.git"
+  },
+  "keywords": [
+    "onesignal",
+    "one-signal",
+    "gcm",
+    "signal",
+    "notification"
+  ],
+  "author": "Zeynel <zeynel.fxgx@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KolektifLabs/onesignal-node.git/issues"
+  },
+  "homepage": "https://github.com/KolektifLabs/onesignal-node.git#readme",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2"
+  },
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}

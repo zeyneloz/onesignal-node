@@ -359,6 +359,6 @@ myClient.editDevice('deviceId', deviceBody, function (err, httpResponse, data) {
 ```
 
 
-##License
+## License
 
 This project is under the MIT license.

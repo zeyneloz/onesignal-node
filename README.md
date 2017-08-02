@@ -17,6 +17,8 @@ A Node.js client library for [OneSignal](https://onesignal.com/) API.
   * [Vieving a device](#viewing-a-device)
   * [Adding a device](#adding-a-device)
   * [Editing a device](#editing-a-device)
+  * [CSV Export](#csv-export)
+  * [Opening track](#opening-track)
   
 ## Installation
 
@@ -164,7 +166,7 @@ myClient.sendNotification(firstNotification, function (err, httpResponse,data) {
    }
 });
 ```
-To target one or more devices use `.setTargetDevices(include_player_ids)` method:
+To target one or more device, use `.setTargetDevices(include_player_ids)` method:
 ``` js
 var OneSignal = require('onesignal-node');
 
@@ -357,7 +359,29 @@ myClient.editDevice('deviceId', deviceBody, function (err, httpResponse, data) {
     ...
 });
 ```
+### CSV Export
+``` js
+var myClient = new OneSignal.Client({
+    userAuthKey: 'XXXXXX',
+    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }
+});
 
+myClient.csvExport({ extra_fields: ['location'] }, function (err, httpResponse, data) {
+...
+});
+```
+
+## Opening track
+``` js
+var myClient = new OneSignal.Client({
+    userAuthKey: 'XXXXXX',
+    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }
+});
+
+myClient.trackOpen('notificationId', { opened: true }, function (err, httpResponse, data) {
+...
+});
+```
 
 ## License
 

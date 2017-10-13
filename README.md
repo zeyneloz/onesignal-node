@@ -137,6 +137,18 @@ myClient.sendNotification(firstNotification, function (err, httpResponse,data) {
 });
 ```
 
+You can also use Promises:
+
+```js
+myClient.sendNotification(firstNotification)
+    .then(function (response) {
+        console.log(response.data, response.httpResponse.statusCode);
+    })
+    .catch(function (err) {
+        console.log('Something went wrong...', err);
+    });
+```
+
 To send a notification based on filters, use `.setFilters(filters)` method:
 ``` js
 var OneSignal = require('onesignal-node');

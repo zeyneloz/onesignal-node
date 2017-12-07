@@ -120,7 +120,7 @@ var firstNotification = new OneSignal.Notification({
 });
 
 // set target users
-firstNotification.setIncludedSegments(['All Users']);
+firstNotification.setIncludedSegments(['All']);
 firstNotification.setExcludedSegments(['Inactive Users']);
 
 // set notification parameters

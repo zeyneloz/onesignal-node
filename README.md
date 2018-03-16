@@ -19,7 +19,8 @@ A Node.js client library for [OneSignal](https://onesignal.com/) API.
   * [Editing a device](#editing-a-device)
   * [CSV Export](#csv-export)
   * [Opening track](#opening-track)
-  
+* [Tests](#tests)
+
 ## Installation
 
 ```
@@ -194,9 +195,9 @@ var firstNotification = new OneSignal.Notification({
     }
 });
 
-firstNotification.setTargetDevices(["1dd608f2-c6a1-11e3-851d-000c2940e62c", 
+firstNotification.setTargetDevices(["1dd608f2-c6a1-11e3-851d-000c2940e62c",
     "2dd608f2-c6a1-11e3-851d-000c2940e62c"]);
-    
+
 myClient.sendNotification(firstNotification, function (err, httpResponse,data) {
    if (err) {
        console.log('Something went wrong...');
@@ -222,7 +223,7 @@ You can cancel a notification simply by calling `.cancel(notificationId, callbac
 // this will cancel the notification for current app (myClient.app)
 myClient.cancelNotification('notificationId', function (err, httpResponse, data) {
     if (err) {
-        
+
     }
 })
 ```
@@ -230,7 +231,7 @@ myClient.cancelNotification('notificationId', function (err, httpResponse, data)
 ### Viewing push notifications
 To view all push notifications for an app:
 
-``` js 
+``` js
 var myClient = new OneSignal.Client({
     userAuthKey: 'XXXXXX',
     app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }
@@ -383,7 +384,7 @@ myClient.csvExport({ extra_fields: ['location'] }, function (err, httpResponse, 
 });
 ```
 
-## Opening track
+### Opening track
 ``` js
 var myClient = new OneSignal.Client({
     userAuthKey: 'XXXXXX',
@@ -393,6 +394,13 @@ var myClient = new OneSignal.Client({
 myClient.trackOpen('notificationId', { opened: true }, function (err, httpResponse, data) {
 ...
 });
+```
+
+## Tests
+
+Running all tests:
+```bash
+$ npm test
 ```
 
 ## License

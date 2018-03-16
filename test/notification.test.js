@@ -59,4 +59,33 @@ describe('Notification Tests', function () {
       expect(response.postBody.template_id).to.equal(notification.template_id);
     })
   })
+
+  describe('Setting OneSignal Properties', function () {
+    it('Expect to throw an error when setting invalid parameter', function () {
+      var notification = NotificationMock.validWithContents;
+      var notificationObject = new OneSignal.Notification(notification);
+      try {
+        var parameter = NotificationMock.invalidParameter;
+        notificationObject.setParameter(parameter.name, parameter.value);
+        expect(response).to.equal(undefined);
+      } catch (err) {
+        expect(err).to.be.an('string');
+        expect(err).to.equal(
+          '"other" is not present in documentation. You should add a exclamation'
+          .concat(' mark to the begging of the name, if you want to set it : !other'));
+      }
+    })
+
+    it('Expect to valid data when setting parameter', function () {
+      var notification = NotificationMock.validWithContents;
+      var notificationObject = new OneSignal.Notification(notification);
+      var parameter = NotificationMock.validParameter;
+      notificationObject.setParameter(parameter.name, parameter.value);
+      var response = notificationObject;
+      expect(response).to.be.an('object');
+      expect(response.postBody).to.be.an('object');
+      expect(response.postBody.filters).to.be.an('string');
+      expect(response.postBody.filters).to.equal(parameter.value);
+    })
+  })
 })

@@ -14,5 +14,13 @@ module.exports = {
   },
   validWithTemplateId: {
     template_id: 'test'
+  },
+  invalidParameter: {
+    name: 'other',
+    value: 'other'
+  },
+  validParameter: {
+    name: 'filters',
+    value: 'test'
   }
 }

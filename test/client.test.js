@@ -3,6 +3,7 @@
 var expect = require('chai').expect;
 var OneSignal = require('../lib');
 var ClientMock = require('./mocks/client');
+var NotificationMock = require('./mocks/notification');
 var Constants = require('../lib/constants');
 
 describe('Client Tests', function () {
@@ -92,6 +93,35 @@ describe('Client Tests', function () {
       expect(response.app).to.be.an('object');
       expect(response.app.appAuthKey).to.equal(ClientMock.validSetApp.appAuthKey);
       expect(response.app.appId).to.equal(ClientMock.validSetApp.appId);
+    })
+  })
+
+  describe('Send Notification', function () {
+    it('Expect to throw an error when sending a notification withou a notification object', function () {
+      var client = ClientMock.validClient;
+      var clientObject = new OneSignal.Client(client);
+      var notification = NotificationMock.emptyNotification;
+      try {
+        var response = clientObject.sendNotification(notification);
+        expect(response).to.equal(undefined);
+      } catch (err) {
+        expect(err).to.be.an('string');
+        expect(err).to.equal('notification parameter must be a typeof Notification object.');
+      }
+    })
+
+    it('Expect to throw an error when sending a notification for client without app', function () {
+      var client = ClientMock.validEmptyClient;
+      var clientObject = new OneSignal.Client(client);
+      var notification = NotificationMock.validWithContents;
+      var notificationObject = new OneSignal.Notification(notification);
+      try {
+        var response = clientObject.sendNotification(notificationObject);
+        expect(response).to.equal(undefined);
+      } catch (err) {
+        expect(err).to.be.an('string');
+        expect(err).to.equal('You must set either an "app" or "apps" on Client');
+      }
     })
   })
 })

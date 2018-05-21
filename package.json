@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KolektifLabs/onesignal-node.git"
+    "url": "git+https://github.com/zeyneloz/onesignal-node.git"
   },
   "keywords": [
     "onesignal",
@@ -20,9 +20,9 @@
   "author": "Zeynel <zeynel.fxgx@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/KolektifLabs/onesignal-node.git/issues"
+    "url": "https://github.com/zeyneloz/onesignal-node.git/issues"
   },
-  "homepage": "https://github.com/KolektifLabs/onesignal-node.git#readme",
+  "homepage": "https://github.com/zeyneloz/onesignal-node.git#readme",
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^3.5.3"

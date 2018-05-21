@@ -1,6 +1,6 @@
 {
   "name": "onesignal-node",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Node.js Library for OneSignal push notification service",
   "main": "./lib/index.js",
   "scripts": {

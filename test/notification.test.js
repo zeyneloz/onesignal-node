@@ -61,21 +61,6 @@ describe('Notification Tests', function () {
   })
 
   describe('Setting OneSignal Properties', function () {
-    it('Expect to throw an error when setting invalid parameter', function () {
-      var notification = NotificationMock.validWithContents;
-      var notificationObject = new OneSignal.Notification(notification);
-      try {
-        var parameter = NotificationMock.invalidParameter;
-        notificationObject.setParameter(parameter.name, parameter.value);
-        expect(response).to.equal(undefined);
-      } catch (err) {
-        expect(err).to.be.an('string');
-        expect(err).to.equal(
-          '"other" is not present in documentation. You should add a exclamation'
-          .concat(' mark to the begging of the name, if you want to set it : !other'));
-      }
-    })
-
     it('Expect to valid data when setting parameter', function () {
       var notification = NotificationMock.validWithContents;
       var notificationObject = new OneSignal.Notification(notification);

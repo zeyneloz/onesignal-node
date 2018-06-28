@@ -14,7 +14,7 @@ A Node.js client library for [OneSignal](https://onesignal.com/) API.
   * [Creating an app](#creating-an-app)
   * [Updating an app](#updating-an-app)
   * [Listing devices](#viewing-devices)
-  * [Vieving a device](#viewing-a-device)
+  * [Viewing a device](#viewing-a-device)
   * [Adding a device](#adding-a-device)
   * [Editing a device](#editing-a-device)
   * [CSV Export](#csv-export)

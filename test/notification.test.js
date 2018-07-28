@@ -18,18 +18,6 @@ describe('Notification Tests', function () {
       }
     })
 
-    it('Expect to throw an error with object without one of required fields on notification', function () {
-      var notification = NotificationMock.invalidNotification;
-      try {
-        var response = new OneSignal.Notification(notification);
-        expect(response).to.equal(undefined);
-      } catch (err) {
-        expect(err).to.be.an('string');
-        expect(err).to.equal(
-          'Body must include one of the following fields: contents, content_available, template_id');
-      }
-    })
-
     it('Expect to valid notification with contents', function () {
       var notification = NotificationMock.validWithContents;
       var response = new OneSignal.Notification(notification);

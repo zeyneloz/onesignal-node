@@ -1,3 +1,5 @@
+# onesignal-node    
+
 <p align="center">
   <a href="https://www.npmjs.com/package/onesignal-node">
     <img src="https://img.shields.io/npm/v/onesignal-node.svg" alt="Dependency Status" />
@@ -8,10 +10,8 @@
 </p>
 
 <br>
-  
-# onesignal-node    
-    
-A Node.js client library for [OneSignal](https://onesignal.com/) API.    
+
+A Node.js client library for [OneSignal](https://onesignal.com/) API.
     
 ## Table of Contents    
 * [Installation](#installation)    

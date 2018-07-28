@@ -1,4 +1,13 @@
+<p align="center">
+  <a href="https://www.npmjs.com/package/onesignal-node">
+    <img src="https://img.shields.io/npm/v/onesignal-node.svg" alt="Dependency Status" />
+  </a>
+  <a href="https://www.npmjs.com/package/onesignal-node">
+    <img src="https://img.shields.io/npm/dm/onesignal-node.svg" alt="Dependency Status" />
+  </a>
+</p>
 
+<br>
   
 # onesignal-node    
     

@@ -58,26 +58,15 @@ var myClient = new OneSignal.Client({
    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
 });      
 ```      
-      
-You can also create a Client for multiple Apps      
-```js      
-// create a Client for a multiple apps      
-var myClient = new OneSignal.Client({      
-   userAuthKey: 'XXXXXX',      
-   apps: ['id1', 'id2'] // your app ids      
-});      
-```      
+          
 You can always create a Client with no credential and set them later:      
-```js      
-// create a Client for a multiple apps      
+```js          
 var myClient = new OneSignal.Client({});      
 myClient.userAuthKey = 'XXXXXX';      
       
 myClient.app = { appAuthKey: 'XXXXX', appId: 'XXXXX' };      
 // or      
-myClient.setApp({ appAuthKey: 'XXXXX', appId: 'XXXXX' });      
-      
-myClient.apps = ['id1', 'id2', 'id3']; // this will override "app"      
+myClient.setApp({ appAuthKey: 'XXXXX', appId: 'XXXXX' });   
 ```      
       
 ### Creating new notification object      
@@ -232,14 +221,7 @@ myClient.sendNotification(firstNotification, function (err, httpResponse,data) {
       
 ```      
       
-Note that `.sendNotification(notification, callback)` function will send the notification to      
-the `app` specified during the creation of Client object. If you want to send notification      
-to multiple apps, you must set `apps` array instead, on Client object:      
-```js      
-var myClient = new OneSignal.Client({});      
-myClient.userAuthKey = 'XXXXXX';      
-myClient.apps = ['id1', 'id2'];      
-```      
+Note that `.sendNotification(notification, callback)` function will send the notification to the `app` specified during the creation of Client object.
       
 ### Cancel a push notification      
 You can cancel a notification simply by calling `.cancel(notificationId, callback)` method      

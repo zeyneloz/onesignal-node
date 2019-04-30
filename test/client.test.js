@@ -17,7 +17,7 @@ describe('Client Tests', function () {
         expect(err).to.be.an('string');
         expect(err).to.equal('credentials parameter must be a JSON object');
       }
-    })
+    });
 
     it('Expect to throw an error with invalid userAuthKey format', function () {
       var client = ClientMock.invalidUserAuthKey;
@@ -28,7 +28,7 @@ describe('Client Tests', function () {
         expect(err).to.be.an('string');
         expect(err).to.equal('userAuthKey must be a string');
       }
-    })
+    });
 
     it('Expect to throw an error without app object', function () {
       var client = ClientMock.invalidAppProperty;
@@ -38,7 +38,7 @@ describe('Client Tests', function () {
       } catch (err) {
         expect(err).to.be.an('object');
       }
-    })
+    });
 
     it('Expect to throw an error without appAuthKey property on app object', function () {
       var client = ClientMock.invalidAppWithouAuthProperty;
@@ -49,7 +49,7 @@ describe('Client Tests', function () {
         expect(err).to.be.an('string');
         expect(err).to.equal('app must contain appAuthKey');
       }
-    })
+    });
 
     it('Expect to throw an error without appId property on app object', function () {
       var client = ClientMock.invalidAppWithoutIdProperty;
@@ -60,7 +60,7 @@ describe('Client Tests', function () {
         expect(err).to.be.an('string');
         expect(err).to.equal('app must contain appId');
       }
-    })
+    });
 
     it('Expect to valid a JSON object to create a client', function () {
       var client = ClientMock.validClient;
@@ -72,14 +72,14 @@ describe('Client Tests', function () {
       expect(response.app).to.be.an('object');
       expect(response.app.appAuthKey).to.equal(client.app.appAuthKey);
       expect(response.app.appId).to.equal(client.app.appId);
-    })
+    });
 
     it('Expect to create empty client', function () {
       var client = ClientMock.validEmptyClient;
       var response = new OneSignal.Client(client);
       expect(response).to.be.an('object');
       expect(response.API_URI).to.equal(Constants.API_ROOT);
-    })
+    });
 
     it('Expect to set userAuthKey and app object for empty client', function () {
       var client = ClientMock.validEmptyClient;
@@ -94,10 +94,10 @@ describe('Client Tests', function () {
       expect(response.app.appAuthKey).to.equal(ClientMock.validSetApp.appAuthKey);
       expect(response.app.appId).to.equal(ClientMock.validSetApp.appId);
     })
-  })
+  });
 
   describe('Send Notification', function () {
-    it('Expect to throw an error when sending a notification withou a notification object', function () {
+    it('Expect to throw an error when sending a notification without a notification object', function () {
       var client = ClientMock.validClient;
       var clientObject = new OneSignal.Client(client);
       var notification = NotificationMock.emptyNotification;
@@ -108,7 +108,7 @@ describe('Client Tests', function () {
         expect(err).to.be.an('string');
         expect(err).to.equal('notification parameter must be a typeof Notification object.');
       }
-    })
+    });
 
     it('Expect to throw an error when sending a notification for client without app', function () {
       var client = ClientMock.validEmptyClient;
@@ -120,8 +120,8 @@ describe('Client Tests', function () {
         expect(response).to.equal(undefined);
       } catch (err) {
         expect(err).to.be.an('string');
-        expect(err).to.equal('You must set either an "app" or "apps" on Client');
+        expect(err).to.equal('App credentials is not found on client.');
       }
-    })
+    });
   })
-})
+});

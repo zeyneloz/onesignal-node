@@ -16,7 +16,7 @@ describe('Notification Tests', function () {
         expect(err).to.be.an('string');
         expect(err).to.equal('Body must be a JSON object');
       }
-    })
+    });
 
     it('Expect to valid notification with contents', function () {
       var notification = NotificationMock.validWithContents;
@@ -26,7 +26,7 @@ describe('Notification Tests', function () {
       expect(response.postBody.contents).to.be.an('object');
       expect(response.postBody.contents).to.have.property('en');
       expect(response.postBody.contents).to.have.property('pt');
-    })
+    });
 
     it('Expect to valid notification with content available', function () {
       var notification = NotificationMock.validWithContentAvailable;
@@ -36,7 +36,7 @@ describe('Notification Tests', function () {
       expect(response.postBody.content_available).to.be.an('boolean');
       expect(response.postBody.content_available)
         .to.equal(notification.content_available);
-    })
+    });
 
     it('Expect to valid notification with template ID', function () {
       var notification = NotificationMock.validWithTemplateId;
@@ -46,7 +46,7 @@ describe('Notification Tests', function () {
       expect(response.postBody.template_id).to.be.an('string');
       expect(response.postBody.template_id).to.equal(notification.template_id);
     })
-  })
+  });
 
   describe('Setting OneSignal Properties', function () {
     it('Expect to valid data when setting parameter', function () {
@@ -61,4 +61,4 @@ describe('Notification Tests', function () {
       expect(response.postBody.filters).to.equal(parameter.value);
     })
   })
-})
+});

@@ -1,4 +1,4 @@
-# onesignal-node      
+# onesige      
 
 <p align="center">  
   <a href="https://www.npmjs.com/package/onesignal-node">  
@@ -204,7 +204,8 @@ var firstNotification = new OneSignal.Notification({
     contents: {      
         en: "Test notification",      
         tr: "Test mesajı"      
-    },    
+    },
+    // 'include_player_id' or 'include_external_user_ids' if you prefer to use your own users ids
     include_player_ids: ["1dd608f2-c6a1-11e3-851d-000c2940e62c", "2dd608f2-c6a1-11e3-851d-000c2940e62c"]    
 });      
     

@@ -3,12 +3,15 @@
   "version": "3.0.0",
   "description": "A Node.js Library for OneSignal push notification service",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=8.13.0"
   },
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
-    "/lib"
+    "/lib",
+    "LICENSE",
+    "README.md",
+    "package.json"
   ],
   "scripts": {
     "lint": "./node_modules/.bin/eslint src test --ext .js,.ts",

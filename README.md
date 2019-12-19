@@ -1,16 +1,18 @@
 # onesignal-node      
 
-<p align="center">  
-  <a href="https://www.npmjs.com/package/onesignal-node">  
-    <img src="https://img.shields.io/npm/v/onesignal-node.svg" alt="Dependency Status" />  
-  </a>  
-  <a href="https://www.npmjs.com/package/onesignal-node">  
-    <img src="https://img.shields.io/npm/dm/onesignal-node.svg" alt="Dependency Status" />  
-  </a>  
-</p>  
-  
-<br>  
-  
+<p align="center">
+  <a href="https://www.npmjs.com/package/onesignal-node">
+    <img src="https://img.shields.io/npm/v/onesignal-node.svg" alt="Dependency Status" />
+  </a>
+  <a href="https://www.npmjs.com/package/onesignal-node">
+    <img src="https://img.shields.io/npm/dm/onesignal-node.svg" alt="Download Count" />
+  </a>
+  <a href="https://circleci.com/gh/zeyneloz/onesignal-node">
+      <img src="https://circleci.com/gh/zeyneloz/onesignal-node/tree/v3.x.svg?style=shield" alt="Build Status" />
+  </a>
+</p>
+<br>
+
 A Node.js client library for [OneSignal](https://onesignal.com/) API.  
       
 ## Table of Contents      

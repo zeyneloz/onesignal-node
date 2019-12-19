@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./lib",
+    "sourceMap": true,
+    "outDir": "./lib",
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node", "mocha", "chai", "sinon"]
+  },
+  "include": [
+    "src/index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "test/**/*.ts",
+    "dist"
+  ],
+  "strict": true,
+  "typedocOptions": {
+    "mode": "modules",
+    "out": "docs"
+  }
+}

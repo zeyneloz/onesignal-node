@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 defaults: &defaults
   working_directory: ~/repo
@@ -46,10 +46,9 @@ jobs:
 
 workflows:
   version: 2
-  test-deploy:
+  test-build-deploy:
     jobs:
-      - test:
-          context: Github
+      - test
       - deploy:
           requires:
             - test

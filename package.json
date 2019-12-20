@@ -17,6 +17,7 @@
     "lint": "./node_modules/.bin/eslint src test --ext .js,.ts",
     "build": "./node_modules/.bin/tsc",
     "test": "./node_modules/.bin/mocha -r ts-node/register 'test/unit/**/*.spec.ts'",
+    "test-integration": "./node_modules/.bin/mocha -r ts-node/register 'test/integration/**/*.spec.ts'",
     "coverage": "./node_modules/.bin/nyc --reporter=lcov npm run test",
     "update-codecov": "./node_modules/.bin/codecov"
   },
@@ -70,6 +71,7 @@
     "sinon-chai": "^3.3.0",
     "source-map-support": "^0.5.16",
     "ts-node": "^8.5.4",
+    "typedoc": "^0.15.5",
     "typescript": "^3.7.3"
   },
   "dependencies": {

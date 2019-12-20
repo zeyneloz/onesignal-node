@@ -9,6 +9,12 @@ export const DEVICES_ONPURCHASE = 'on_purchase';
 export const DEVICES_ONFOCUS = 'on_focus';
 export const DEVICES_CSVEXPORT = 'csv_export';
 
+// Name to be used in query string for url for app_id field.
+export const APP_ID_QUERY_NAME = 'app_id';
+
+// Name to be used in request body for app_id field.
+export const APP_ID_FIELD_NAME = 'app_id';
+
 export const defaultClientOptions = {
   apiRoot: API_ROOT,
 };

@@ -16,6 +16,8 @@ import {
   DEVICES_CSVEXPORT,
   APPS_PATH,
   APPS_SEGMENTS,
+  APP_ID_FIELD_NAME,
+  APP_ID_QUERY_NAME,
 } from '../../src/constants';
 
 import { Client } from '../../src/client';
@@ -73,7 +75,7 @@ describe('Client', () => {
 
       it('includes app_id in request body', async () => {
         await client.createNotification({});
-        expectRequestBodyToHave(requestSpy, { app_id: APP_ID });
+        expectRequestBodyToHave(requestSpy, { [APP_ID_FIELD_NAME]: APP_ID });
       });
 
       it('makes request with given body', async () => {
@@ -94,7 +96,7 @@ describe('Client', () => {
         await client.cancelNotification(notificationId);
         const expectedPath = `${API_ROOT}/${NOTIFICATIONS_PATH}/${notificationId}`;
         expectRequestToBe(requestSpy, expectedPath, 'DELETE', APP_API_KEY);
-        expectRequestParamsToHave(requestSpy, { app_id: APP_ID });
+        expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID });
       });
     });
 
@@ -105,7 +107,7 @@ describe('Client', () => {
         await client.viewNotification(notificationId);
         const expectedPath = `${API_ROOT}/${NOTIFICATIONS_PATH}/${notificationId}`;
         expectRequestToBe(requestSpy, expectedPath, 'GET', APP_API_KEY);
-        expectRequestParamsToHave(requestSpy, { app_id: APP_ID });
+        expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID });
       });
     });
 
@@ -114,7 +116,7 @@ describe('Client', () => {
         await client.viewNotifications();
         const expectedPath = `${API_ROOT}/${NOTIFICATIONS_PATH}`;
         expectRequestToBe(requestSpy, expectedPath, 'GET', APP_API_KEY);
-        expectRequestParamsToHave(requestSpy, { app_id: APP_ID });
+        expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID });
       });
 
       it('includes query params in url when query is given', async () => {
@@ -123,7 +125,7 @@ describe('Client', () => {
           kind: 1,
         };
         await client.viewNotifications(query);
-        expectRequestParamsToHave(requestSpy, { app_id: APP_ID, ...query });
+        expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID, ...query });
       });
     });
 
@@ -142,7 +144,7 @@ describe('Client', () => {
 
       it('includes app_id in request body', async () => {
         await client.notificationHistory(notificationId, postBody);
-        expectRequestBodyToHave(requestSpy, { app_id: APP_ID });
+        expectRequestBodyToHave(requestSpy, { [APP_ID_FIELD_NAME]: APP_ID });
       });
 
       it('makes request with given body', async () => {
@@ -156,7 +158,7 @@ describe('Client', () => {
         await client.viewDevices();
         const expectedPath = `${API_ROOT}/${DEVICES_PATH}`;
         expectRequestToBe(requestSpy, expectedPath, 'GET', APP_API_KEY);
-        expectRequestParamsToHave(requestSpy, { app_id: APP_ID });
+        expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID });
       });
 
       it('includes query params in url when query is given', async () => {
@@ -165,7 +167,7 @@ describe('Client', () => {
           offset: 44,
         };
         await client.viewDevices(query);
-        expectRequestParamsToHave(requestSpy, { app_id: APP_ID, ...query });
+        expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID, ...query });
       });
     });
 
@@ -176,7 +178,7 @@ describe('Client', () => {
         await client.viewDevice(deviceId);
         const expectedPath = `${API_ROOT}/${DEVICES_PATH}/${deviceId}`;
         expectRequestToBe(requestSpy, expectedPath, 'GET', APP_API_KEY);
-        expectRequestParamsToHave(requestSpy, { app_id: APP_ID });
+        expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID });
       });
     });
 
@@ -195,7 +197,7 @@ describe('Client', () => {
 
       it('includes app_id in request body', async () => {
         await client.addDevice(postBody);
-        expectRequestBodyToHave(requestSpy, { app_id: APP_ID });
+        expectRequestBodyToHave(requestSpy, { [APP_ID_FIELD_NAME]: APP_ID });
       });
 
       it('makes request with given body', async () => {
@@ -219,7 +221,7 @@ describe('Client', () => {
 
       it('includes app_id in request body', async () => {
         await client.editDevice(deviceId, postBody);
-        expectRequestBodyToHave(requestSpy, { app_id: APP_ID });
+        expectRequestBodyToHave(requestSpy, { [APP_ID_FIELD_NAME]: APP_ID });
       });
 
       it('makes request with given body', async () => {
@@ -240,7 +242,7 @@ describe('Client', () => {
 
       it('includes app_id in request body', async () => {
         await client.editDevice(deviceId, postBody);
-        expectRequestBodyToHave(requestSpy, { app_id: APP_ID });
+        expectRequestBodyToHave(requestSpy, { [APP_ID_FIELD_NAME]: APP_ID });
       });
 
       it('makes request with given body', async () => {
@@ -263,7 +265,7 @@ describe('Client', () => {
 
       it('includes app_id in request body', async () => {
         await client.newPurchase(deviceId, postBody);
-        expectRequestBodyToHave(requestSpy, { app_id: APP_ID });
+        expectRequestBodyToHave(requestSpy, { [APP_ID_FIELD_NAME]: APP_ID });
       });
 
       it('makes request with given body', async () => {
@@ -287,7 +289,7 @@ describe('Client', () => {
 
       it('includes app_id in request body', async () => {
         await client.incrementSessionLength(deviceId, postBody);
-        expectRequestBodyToHave(requestSpy, { app_id: APP_ID });
+        expectRequestBodyToHave(requestSpy, { [APP_ID_FIELD_NAME]: APP_ID });
       });
 
       it('makes request with given body', async () => {
@@ -306,7 +308,7 @@ describe('Client', () => {
         await client.exportCSV(postBody);
         const expectedPath = `${API_ROOT}/${DEVICES_PATH}/${DEVICES_CSVEXPORT}`;
         expectRequestToBe(requestSpy, expectedPath, 'POST', APP_API_KEY);
-        expectRequestParamsToHave(requestSpy, { app_id: APP_ID });
+        expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID });
       });
 
       it('makes request with given body', async () => {

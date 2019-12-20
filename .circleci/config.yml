@@ -6,7 +6,7 @@ defaults: &defaults
     - image: circleci/node:8
 
 jobs:
-  test:
+  test_and_build:
     <<: *defaults
     steps:
       - checkout
@@ -38,6 +38,23 @@ jobs:
           root: ~/repo
           paths: .
 
+  integration_test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v3-dependencies-{{ checksum "package.json" }}
+            - v3-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v3-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Run integration tests
+          command: npm test-integration
+
   deploy:
     <<: *defaults
     steps:
@@ -54,10 +71,12 @@ workflows:
   version: 2
   test-build-deploy:
     jobs:
-      - test
+      - test_and_build
+      - integration_test
       - deploy:
           requires:
-            - test
+            - test_and_build
+            - integration_test
           filters:
             tags:
               only: /^v.*/

@@ -9,6 +9,8 @@ import {
   DEVICES_ONFOCUS,
   DEVICES_CSVEXPORT,
   APPS_SEGMENTS,
+  APP_ID_QUERY_NAME,
+  APP_ID_FIELD_NAME,
 } from './constants';
 
 import { stripTrailingSlash, jsonToQueryString, basicAuthRequest } from './utils';
@@ -52,7 +54,7 @@ export class Client {
    */
   public createNotification(body: CreateNotificationBody): Promise<ClientResponse> {
     // eslint-disable-next-line @typescript-eslint/camelcase
-    const postBody = { ...{ app_id: this.appId }, ...body };
+    const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
     const uri = `${this.options.apiRoot}/${NOTIFICATIONS_PATH}`;
     return basicAuthRequest(uri, 'POST', this.apiKey, postBody);
   }
@@ -66,7 +68,7 @@ export class Client {
    * @return {Promise<Response>} Http response of One Signal server.
    */
   public cancelNotification(notificationId: string): Promise<ClientResponse> {
-    const uri = `${this.options.apiRoot}/${NOTIFICATIONS_PATH}/${notificationId}?app_id=${this.appId}`;
+    const uri = `${this.options.apiRoot}/${NOTIFICATIONS_PATH}/${notificationId}?${APP_ID_QUERY_NAME}=${this.appId}`;
     return basicAuthRequest(uri, 'DELETE', this.apiKey);
   }
 
@@ -79,7 +81,7 @@ export class Client {
    * @return {Promise<Response>} Http response of One Signal server.
    */
   public viewNotification(notificationId: string): Promise<ClientResponse> {
-    const uri = `${this.options.apiRoot}/${NOTIFICATIONS_PATH}/${notificationId}?app_id=${this.appId}`;
+    const uri = `${this.options.apiRoot}/${NOTIFICATIONS_PATH}/${notificationId}?${APP_ID_QUERY_NAME}=${this.appId}`;
     return basicAuthRequest(uri, 'GET', this.apiKey);
   }
 
@@ -93,7 +95,7 @@ export class Client {
    */
   public viewNotifications(query?: ViewNotificationsQuery): Promise<ClientResponse> {
     const queryString = jsonToQueryString(query);
-    const uri = `${this.options.apiRoot}/${NOTIFICATIONS_PATH}?app_id=${this.appId}&${queryString}`;
+    const uri = `${this.options.apiRoot}/${NOTIFICATIONS_PATH}?${APP_ID_QUERY_NAME}=${this.appId}&${queryString}`;
     return basicAuthRequest(uri, 'GET', this.apiKey);
   }
 
@@ -109,7 +111,7 @@ export class Client {
   public notificationHistory(notificationId: string, body: NotificationHistoryBody): Promise<ClientResponse> {
     const uri = `${this.options.apiRoot}/${NOTIFICATIONS_PATH}/${notificationId}/${NOTIFICATIONS_HISTORY}`;
     // eslint-disable-next-line @typescript-eslint/camelcase
-    const postBody = { ...{ app_id: this.appId }, ...body };
+    const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
     return basicAuthRequest(uri, 'POST', this.apiKey, postBody);
   }
 
@@ -123,7 +125,7 @@ export class Client {
    */
   public viewDevices(query?: LimitOffsetQuery): Promise<ClientResponse> {
     const queryString = jsonToQueryString(query);
-    const uri = `${this.options.apiRoot}/${DEVICES_PATH}?app_id=${this.appId}&${queryString}`;
+    const uri = `${this.options.apiRoot}/${DEVICES_PATH}?${APP_ID_QUERY_NAME}=${this.appId}&${queryString}`;
     return basicAuthRequest(uri, 'GET', this.apiKey);
   }
 
@@ -136,7 +138,7 @@ export class Client {
    * @return {Promise<Response>} Http response of One Signal server.
    */
   public viewDevice(identifier: string): Promise<ClientResponse> {
-    const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${identifier}?app_id=${this.appId}`;
+    const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${identifier}?${APP_ID_QUERY_NAME}=${this.appId}`;
     return basicAuthRequest(uri, 'GET', this.apiKey);
   }
 
@@ -150,7 +152,7 @@ export class Client {
    */
   public addDevice(body: AddDeviceBody): Promise<ClientResponse> {
     // eslint-disable-next-line @typescript-eslint/camelcase
-    const postBody = { ...{ app_id: this.appId }, ...body };
+    const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
     const uri = `${this.options.apiRoot}/${DEVICES_PATH}`;
     return basicAuthRequest(uri, 'POST', this.apiKey, postBody);
   }
@@ -166,7 +168,7 @@ export class Client {
    */
   public editDevice(deviceId: string, body: EditDeviceBody): Promise<ClientResponse> {
     // eslint-disable-next-line @typescript-eslint/camelcase
-    const postBody = { ...{ app_id: this.appId }, ...body };
+    const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
     const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${deviceId}`;
     return basicAuthRequest(uri, 'PUT', this.apiKey, postBody);
   }
@@ -182,7 +184,7 @@ export class Client {
    */
   public newSession(deviceId: string, body: NewSessionBody): Promise<ClientResponse> {
     // eslint-disable-next-line @typescript-eslint/camelcase
-    const postBody = { ...{ app_id: this.appId }, ...body };
+    const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
     const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${deviceId}/${DEVICES_ONSESSION}`;
     return basicAuthRequest(uri, 'POST', this.apiKey, postBody);
   }
@@ -198,7 +200,7 @@ export class Client {
    */
   public newPurchase(deviceId: string, body: NewPurchaseBody): Promise<ClientResponse> {
     // eslint-disable-next-line @typescript-eslint/camelcase
-    const postBody = { ...{ app_id: this.appId }, ...body };
+    const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
     const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${deviceId}/${DEVICES_ONPURCHASE}`;
     return basicAuthRequest(uri, 'POST', this.apiKey, postBody);
   }
@@ -214,7 +216,7 @@ export class Client {
    */
   public incrementSessionLength(deviceId: string, body: IncrementSessionLengthBody): Promise<ClientResponse> {
     // eslint-disable-next-line @typescript-eslint/camelcase
-    const postBody = { ...{ app_id: this.appId }, ...body };
+    const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
     const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${deviceId}/${DEVICES_ONFOCUS}`;
     return basicAuthRequest(uri, 'POST', this.apiKey, postBody);
   }
@@ -228,7 +230,7 @@ export class Client {
    * @return {Promise<ClientResponse>} Http response of One Signal server.
    */
   public exportCSV(body: ExportCSVBody): Promise<ClientResponse> {
-    const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${DEVICES_CSVEXPORT}?app_id=${this.appId}`;
+    const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${DEVICES_CSVEXPORT}?${APP_ID_QUERY_NAME}=${this.appId}`;
     return basicAuthRequest(uri, 'POST', this.apiKey, body);
   }
 

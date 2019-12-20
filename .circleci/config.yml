@@ -29,7 +29,10 @@ jobs:
           name: Build the project
           command: npm run build
       - run:
-          name: Upload coverage
+          name: Run coverage
+          command: npm run coverage
+      - run:
+          name: Upload coverage results
           command: npm run update-codecov
       - persist_to_workspace:
           root: ~/repo

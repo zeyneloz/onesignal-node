@@ -53,7 +53,7 @@ jobs:
           key: v3-dependencies-{{ checksum "package.json" }}
       - run:
           name: Run integration tests
-          command: npm test-integration
+          command: npm run test-integration
 
   deploy:
     <<: *defaults

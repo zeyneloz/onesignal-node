@@ -1,0 +1,16 @@
+coverage:
+  status:
+    project:
+      default:
+        # basic
+        target: 75
+        threshold: 25
+        base: auto
+        flags: null
+        paths: null
+        # advanced
+        branches: null
+        if_not_found: success
+        if_ci_failed: error
+        informational: False
+        only_pulls: false

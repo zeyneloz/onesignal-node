@@ -1,0 +1,26 @@
+{
+  "cache": false,
+  "extension": [
+    ".ts"
+  ],
+  "include": [
+      "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/index.ts",
+    "src/constants.ts",
+    "src/errors.ts",
+    "src/types.ts"
+  ],
+  "sourceMap": true,
+  "reporter": [
+    "html",
+    "text",
+    "text-summary"
+  ],
+  "require": [
+  	"ts-node/register"
+  ],
+  "instrument": true,
+  "all": true
+}

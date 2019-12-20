@@ -1,468 +1,403 @@
 # onesignal-node      
 
-<p align="center">  
-  <a href="https://www.npmjs.com/package/onesignal-node">  
-    <img src="https://img.shields.io/npm/v/onesignal-node.svg" alt="Dependency Status" />  
-  </a>  
-  <a href="https://www.npmjs.com/package/onesignal-node">  
-    <img src="https://img.shields.io/npm/dm/onesignal-node.svg" alt="Dependency Status" />  
-  </a>  
-</p>  
-  
-<br>  
-  
+<p align="center">
+  <a href="https://www.npmjs.com/package/onesignal-node">
+    <img src="https://img.shields.io/npm/v/onesignal-node.svg" alt="Dependency Status" />
+  </a>
+  <a href="https://www.npmjs.com/package/onesignal-node">
+    <img src="https://img.shields.io/npm/dm/onesignal-node.svg" alt="Download Count" />
+  </a>
+  <a href="https://circleci.com/gh/zeyneloz/onesignal-node">
+    <img src="https://circleci.com/gh/zeyneloz/onesignal-node/tree/v3.x.svg?style=shield" alt="Build Status" />
+  </a>
+  <a href="https://snyk.io/test/github/zeyneloz/onesignal-node?targetFile=package.json">
+    <img src="https://snyk.io/test/github/zeyneloz/onesignal-node/badge.svg?targetFile=package.json" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/zeyneloz/onesignal-node?targetFile=package.json" style="max-width:100%;">
+  </a>
+  <a href="https://codecov.io/gh/zeyneloz/onesignal-node">
+    <img src="https://codecov.io/gh/zeyneloz/onesignal-node/branch/master/graph/badge.svg" />
+  </a>
+</p>
+<br>
+
 A Node.js client library for [OneSignal](https://onesignal.com/) API.  
+**IMPORTANT:** This documentation belongs to v3.x.x which has no backward compatibility.
+Please see [this page](https://github.com/zeyneloz/onesignal-node/tree/v2.x) for v2.x.x.  
       
 ## Table of Contents      
+* [Overview](#overview)
 * [Installation](#installation)      
-* [Usage](*usage)      
-  * [Creating a service client](#creating-a-client)      
-  * [Send a push notification](#send-push-notifications)      
-  * [Cancel a push notification](#cancel-a-push-notification)      
-  * [View push notifications](#view-push-notifications)      
-  * [View a push notification](#view-a-push-notification)      
+* [Usage](#usage)        
+  * [Client Types](#client-types)
+  * [Creating Client](#creating-client)      
+  * [Create notification](#create-notification)      
+  * [Cancel notification](#cancel-notification)      
+  * [View notifications](#view-notifications)      
+  * [View notification](#view-notification)      
   * [View apps](#view-apps)      
   * [Create an app](#create-an-app)      
   * [Update an app](#update-an-app)      
   * [View devices](#view-devices)      
-  * [View a device](#view-a-device)      
+  * [View device](#view-device)      
   * [Add a device](#add-a-device)      
   * [Edit a device](#edit-a-device)      
   * [New session](#new-session)  
   * [New purchase](#new-purchase)  
   * [Increment Session Length](#increment-session-length)  
   * [CSV Export](#csv-export)      
-  * [Open track](#open-track)      
 * [Tests](#tests)
 * [Contributing](#contributing)
       
+
+## Overview  
+
+This is a wrapper library over [OneSignal REST API](https://documentation.onesignal.com/reference). You can create notifications,
+view apps, edit a device and all other actions you can take on OneSignal REST API.
+
 ## Installation      
       
 ```      
 npm install onesignal-node --save      
 ```      
-## Usage      
-``` js      
-var OneSignal = require('onesignal-node');      
-```      
-      
-### Creating a client      
-You can create a OneSignal Client as shown below. It takes a JSON object as parameter which      
-contains your OneSignal API credentials.      
-You can find your userAuthKey and REST API Key (appAuthKey) on OneSignal `Account & API Keys` page.      
-```js      
-// create a new Client for a single app      
-var myClient = new OneSignal.Client({      
-   userAuthKey: 'XXXXXX',      
-   // note that "app" must have "appAuthKey" and "appId" keys      
-   app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-```      
-          
-You can always create a Client with no credential and set them later:      
-```js          
-var myClient = new OneSignal.Client({});      
-myClient.userAuthKey = 'XXXXXX';      
-      
-myClient.app = { appAuthKey: 'XXXXX', appId: 'XXXXX' };      
-// or      
-myClient.setApp({ appAuthKey: 'XXXXX', appId: 'XXXXX' });   
-```      
-      
-### Creating new notification object      
-We will pass Notification objects to the Client object to send them.      
-```js      
-// contents is REQUIRED unless content_available=true or template_id is set.      
-var firstNotification = new OneSignal.Notification({      
-    contents: {      
-        en: "Test notification",      
-        tr: "Test mesajı"      
-    },    
-    included_segments: ["Active Users", "Inactive Users"]    
-});      
-```      
-You can also create a Notification object without contents:      
-```js      
-var firstNotification = new OneSignal.Notification({      
-    content_available: true      
-});      
-      
-// or if you want to use template_id instead:      
-var firstNotification = new OneSignal.Notification({      
-    template_id: "be4a8044-bbd6-11e4-a581-000c2940e62c"      
-});      
-```      
-      
-You can set filters, data, buttons and all of the fields available on [OneSignal Documentation](https://documentation.onesignal.com/reference#create-notification)      
-by using `postBody` JSON variable.    
-```js      
-var firstNotification = new OneSignal.Notification({      
-    contents: {      
-        en: "Test notification",      
-        tr: "Test mesajı"      
-    },    
-    contents: {"en": "Old content"}    
-});    
-    
-// You can change notification body later by changing postBody    
-firstNotification.postBody["contents"] = {"en": "New content"};    
-firstNotification.postBody["data"] = {"abc": "123", "foo": "bar"};    
-firstNotification.postBody["headings"] = {"en": "English Title", "es": "Spanish Title"};    
-```      
-      
-### Send Push Notifications      
-Sending a notification using Segments:      
-```js      
-var OneSignal = require('onesignal-node');      
-      
-// first we need to create a client      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-// we need to create a notification to send      
-var firstNotification = new OneSignal.Notification({      
-    contents: {      
-        en: "Test notification",      
-        tr: "Test mesajı"      
-    }      
-});      
-      
-// set target users      
-firstNotification.postBody["included_segments"] = ["Active Users"];      
-firstNotification.postBody["excluded_segments"] = ["Banned Users"];      
-      
-// set notification parameters      
-firstNotification.postBody["data"] = {"abc": "123", "foo": "bar"};      
-firstNotification.postBody["send_after"] = 'Thu Sep 24 2015 14:00:00 GMT-0700 (PDT)';    
-      
-// send this notification to All Users except Inactive ones      
-myClient.sendNotification(firstNotification, function (err, httpResponse,data) {      
-   if (err) {      
-       console.log('Something went wrong...');      
-   } else {      
-       console.log(data, httpResponse.statusCode);      
-   }      
-});      
-```      
-      
-You can also use Promises:      
-      
-```js      
-myClient.sendNotification(firstNotification)      
-    .then(function (response) {      
-        console.log(response.data, response.httpResponse.statusCode);      
-    })      
-    .catch(function (err) {      
-        console.log('Something went wrong...', err);      
-    });      
-```      
-      
-To send a notification based on filters, use `filters` parameter:      
-```js      
-var OneSignal = require('onesignal-node');      
-      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-var firstNotification = new OneSignal.Notification({      
-    contents: {      
-        en: "Test notification",      
-        tr: "Test mesajı"      
-    },    
-    filters: [      
-       {"field": "tag", "key": "level", "relation": ">", "value": "10"},    
-       {"field": "amount_spent", "relation": ">","value": "0"}    
-   ]    
-});      
-    
-// You can change filters later    
-firstNotification.postBody["filters"] = [{"field": "tag", "key": "level", "relation": ">", "value": "10"}];    
-firstNotification.postBody["filters"].push({"field": "amount_spent", "relation": ">","value": "0"});      
-      
-myClient.sendNotification(firstNotification, function (err, httpResponse,data) {      
-   if (err) {      
-       console.log('Something went wrong...');      
-   } else {      
-       console.log(data);      
-   }      
-});      
-```      
-To target one or more device, use `include_player_ids` parameter:      
-```js      
-var OneSignal = require('onesignal-node');      
-      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-var firstNotification = new OneSignal.Notification({      
-    contents: {      
-        en: "Test notification",      
-        tr: "Test mesajı"      
-    },    
-    include_player_ids: ["1dd608f2-c6a1-11e3-851d-000c2940e62c", "2dd608f2-c6a1-11e3-851d-000c2940e62c"]    
-});      
-    
-// Add a new target after creating initial notification body    
-firstNotification.postBody["include_player_ids"].push["3aa608f2-c6a1-11e3-851d-000c2940e62c"]    
-    
-myClient.sendNotification(firstNotification, function (err, httpResponse,data) {      
-   if (err) {      
-       console.log('Something went wrong...');      
-   } else {      
-       console.log(data);      
-   }      
-});      
-      
-```      
-      
-Note that `.sendNotification(notification, callback)` function will send the notification to the `app` specified during the creation of Client object.
-      
-### Cancel a push notification      
-You can cancel a notification simply by calling `.cancel(notificationId, callback)` method      
-```js      
-// this will cancel the notification for current app (myClient.app)      
-myClient.cancelNotification('notificationId', function (err, httpResponse, data) {      
-    if (err) {      
-      
-    }      
-})      
-```      
-      
-### View push notifications      
-To view all push notifications for an app:      
-      
-```js      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-myClient.viewNotifications('limit=30', function (err, httpResponse, data) {      
-    if (httpResponse.statusCode === 200 && !err) {      
-        console.log(data);      
-    }      
-});      
-```      
-      
-### View a push notification      
+
+## Usage
       
 ``` js      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-myClient.viewNotification('notificationId', function (err, httpResponse, data) {      
-    if (httpResponse.statusCode === 200 && !err) {      
-        console.log(data);      
-    }      
-});      
+const OneSignal = require('onesignal-node');    
+```      
+
+### Client Types:
+
+For all the actions that require your OneSignal app id and app api key, you should use `OneSignal.Client`.
+Sample actions: create notification, add device, csv export, create segment...
+
+``` js      
+const client = new OneSignal.Client('appId', 'apiKey');
+``` 
+
+For all the actions that require your User Auth Key you should use `OneSignal.UserClient`.
+Sample actions: view apps, update an app, create an app...
+
+``` js      
+const userClient = new OneSignal.UserClient('userAuthKey');
 ```      
       
-### View apps      
-``` js      
-myClient.viewApps(function (err, httpResponse, data) {      
-    console.log(data[0].name); // print the name of the app      
-});      
+### Creating client      
+
+You can create a `Client` object as shown below. It requires two parameters: `appId` and `apiKey`, which you can find them on
+your applications page on OneSignal dashboard.  
+
+There is also an optional parameter called `options`. You can set OneSignal rest api endpoint if you wish to using options.
+By default the library uses `https://onesignal.com/api/v1` for api endpoint.
+  
+```js      
+// With default options
+const client = new OneSignal.Client('appId', 'apiKey');
+
+// With custom API endpoint
+const client = new OneSignal.Client('appId', 'apiKey', { apiRoot: 'https://onesignal.com/api/v2'});
 ```      
-you can also view a single app      
-``` js      
-myClient.viewApp('appId', function (err, httpResponse, data) {      
-    console.log(data);      
-});      
+
+### Creating UserClient      
+
+You can create a `UserClient` object as shown below. It requires one parameter: `userAuthKey`, which you can find it on
+your OneSignal dashboard.
+
+There is also an optional parameter called `options`. You can set OneSignal rest api endpoint if you wish to using options.
+By default the library uses `https://onesignal.com/api/v1` for api endpoint.
+  
+```js      
+// With default options
+const userClient = new OneSignal.UserClient('userAuthKey');
+
+// With custom API endpoint
+const userClient = new OneSignal.UserClient('userAuthKey', { apiRoot: 'https://onesignal.com/api/v2'});
+```     
+
+### Create notification      
+
+https://documentation.onesignal.com/reference#create-notification  
+
+```ts
+.createNotification(body: CreateNotificationBody): Promise<ClientResponse>
+```
+
+Please read the sections above to learn how to create a `Client` object.
+
+```js      
+// See all fields: https://documentation.onesignal.com/reference#create-notification
+const notification = {
+  contents: {
+    'tr': 'Yeni bildirim',
+    'en': 'New notification',
+  },
+  included_segments: ['Subscribed Users'],
+  filters: [
+    { field: 'tag', key: 'level', relation: '>', value: 10 }
+  ]
+};
+
+// using async/await
+try {
+  const response = await client.createNotification(notification);
+  console.log(response.body.id);
+} catch (e) {
+  if (e instanceof OneSignal.HTTPError) {
+    // When status code of HTTP response is not 2xx, HTTPError is thrown.
+    console.log(e.statusCode);
+    console.log(e.body);
+  }
+}
+
+// or you can use promise style:
+client.createNotification(notification)
+  .then(response => {})
+  .catch(e => {});
+```      
+    
+### Cancel notification   
+
+https://documentation.onesignal.com/reference#cancel-notification  
+
+```ts
+.cancelNotification(notificationId: string): Promise<ClientResponse>
+```  
+ 
+```js      
+const response = await client.cancelNotification('notification-id');
+console.log(response.body);
+console.log(response.headers);
+console.log(response.statusCode);    
+```      
+      
+### View notifications      
+
+https://documentation.onesignal.com/reference#view-notifications  
+
+```ts
+.viewNotifications(query?: ViewNotificationsQuery): Promise<ClientResponse>
+```  
+ 
+```js      
+// without query
+const response = await client.viewNotifications();
+console.log(response.body);
+
+// with query
+const response = await client.viewNotifications({ limit:10, kind: 2, offset: 2 });
+```      
+      
+### View notification      
+
+https://documentation.onesignal.com/reference#view-notification  
+
+```ts
+.viewNotification(notificationId: string): Promise<ClientResponse>
+```  
+ 
+```js      
+const response = await client.viewNotification('notification-id');
+console.log(response.body);  
+```       
+      
+### View apps   
+
+https://documentation.onesignal.com/reference#view-apps-apps  
+
+You should use `UserClient` for view apps since it requires User Auth Key  
+   
+```ts
+.viewApps(): Promise<ClientResponse>
+```  
+ 
+```js      
+const response = await userClient.viewApps();
+console.log(response.body);
 ```      
       
 ### Create an app      
-``` js      
-var OneSignal = require('onesignal-node');      
-      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX'      
-});      
-      
-var appBody = {      
-    name: 'Test App',      
-    apns_env: 'production',      
-    gcm_key: 'xxxxx-aaaaa-bbbb'      
-};      
-      
-myClient.createApp(appBody, function (err, httpResponse, data) {      
-    if (httpResponse.statusCode === 200) {      
-        console.log(data);      
-    }      
-});      
+
+https://documentation.onesignal.com/reference#create-an-app
+
+You should use `UserClient` for view apps since it requires User Auth Key  
+   
+```ts
+.createApp(body: CreateAppBody): Promise<ClientResponse>
+```  
+ 
+```js      
+const response = await userClient.createApp( { name: 'APP 1' });
+console.log(response.body);
 ```      
       
 ### Update an app      
-``` js      
-var OneSignal = require('onesignal-node');      
-      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-var appBody = {      
-    name: 'New Test App',      
-    gcm_key: 'xxxxx-aaaaa-bbbb'      
-};      
-      
-myClient.updateApp(appBody, function (err, httpResponse, data) {      
-    console.log(data);      
-});      
-```      
+
+https://documentation.onesignal.com/reference#update-an-app
+
+You should use `UserClient` for view apps since it requires User Auth Key  
+   
+```ts
+.updateApp(appId: string, body: UpdateAppBody): Promise<ClientResponse>
+```  
+ 
+```js      
+const response = await userClient.updateApp( 'app-id',{ site_name: 'test' });
+console.log(response.body);
+```         
       
 ### View devices      
-You can view devices for an app:      
-``` js      
-var myClient = new OneSignal.Client({      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-// you can set limit and offset (optional) or you can leave it empty      
-myClient.viewDevices('limit=100&offset=0', function (err, httpResponse, data) {      
-    console.log(data);      
-});      
-```      
-      
-### View a device      
+
+https://documentation.onesignal.com/reference#view-devices  
+
+```ts
+.viewDevices(query?: LimitOffsetQuery): Promise<ClientResponse>
+```  
+ 
 ```js      
-var myClient = new OneSignal.Client({      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
+const response = await client.viewDevices({ limit: 200, offset: 0 });
+console.log(response.body);
+```       
+         
       
-myClient.viewDevice('deviceId', function (err, httpResponse, data) {      
-    console.log(data);      
-});      
-```      
+### View device   
+   
+https://documentation.onesignal.com/reference#view-device 
+
+```ts
+.viewDevice(identifier: string): Promise<ClientResponse>
+```  
+ 
+```js      
+const response = await client.viewDevice('device-id');
+console.log(response.body);
+```         
       
 ### Add a device      
+   
+https://documentation.onesignal.com/reference#add-a-device  
+
+```ts
+.addDevice(body: AddDeviceBody): Promise<ClientResponse>
+```  
+ 
 ```js      
-      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-// If you want to add device to current app, don't add app_id in deviceBody      
-var deviceBody = {      
-    device_type: 1,      
-    language: 'tr'      
-};      
-      
-myClient.addDevice(deviceBody, function (err, httpResponse, data) {      
-    ...      
-});      
-```      
+const response = await client.addDevice({
+  device_type: 'ios',
+  identifier: 'id1',
+});
+console.log(response.body);
+```         
       
 ### Edit a device      
-```js      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-var deviceBody = {      
-    device_type: 0,      
-    language: 'en',      
-    device_model: 'iPhone5,1'      
-};      
-      
-myClient.editDevice('deviceId', deviceBody, function (err, httpResponse, data) {      
-    ...      
-});      
+   
+https://documentation.onesignal.com/reference#edit-device  
+
+```ts
+.editDevice(deviceId: string, body: EditDeviceBody): Promise<ClientResponse>
 ```  
+ 
+```js      
+const response = await client.editDevice('device-id',{
+  identifier: 'id2',
+});
+console.log(response.body);
+```     
   
 ### New Session     
-```js      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-var postBody = {      
-    language: 'es',      
-    game_version: '1.0',  
-    timezone: -28800  
-};      
-      
-myClient.newSession('playerId', postBody, function (err, httpResponse, data) {      
-    ...      
-});      
+   
+https://documentation.onesignal.com/reference#new-session 
+
+```ts
+.newSession(deviceId: string, body: NewSessionBody): Promise<ClientResponse>
 ```  
+ 
+```js      
+const response = await client.newSession('device-id',{
+  language: 'tr',
+});
+console.log(response.body);
+```     
   
 ### New Purchase  
-```js      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-var postBody = {      
-    purchases: [{  
-       sku: 'SKU123',  
-       iso: 'USD',  
-       amount: 0.99  
-   }]  
-};      
-      
-myClient.newPurchase('playerId', postBody, function (err, httpResponse, data) {      
-    ...      
-});      
+   
+https://documentation.onesignal.com/reference#new-purchase
+
+```ts
+.newPurchase(deviceId: string, body: NewPurchaseBody): Promise<ClientResponse>
 ```  
+ 
+```js      
+const response = await client.newPurchase('device-id',{
+  purchases: [...],
+});
+console.log(response.body);
+```     
   
 ### Increment Session Length  
-```js      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-var postBody = {      
-    state: 'ping',  
-    active_time: 60  
-};      
-      
-myClient.incrementSessionLength('playerId', postBody, function (err, httpResponse, data) {      
-    ...      
-});      
+   
+https://documentation.onesignal.com/reference#increment-session-length
+
+```ts
+.incrementSessionLength(deviceId: string, body: IncrementSessionLengthBody): Promise<ClientResponse>
 ```  
+ 
+```js      
+const response = await client.incrementSessionLength('device-id',{
+  state: '',
+  active_time: 11,
+});
+console.log(response.body);
+```     
   
 ### CSV Export      
+   
+https://documentation.onesignal.com/reference#csv-export
+
+```ts
+.exportCSV(body: ExportCSVBody): Promise<ClientResponse>
+```  
+ 
 ```js      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-myClient.csvExport({ extra_fields: ['location'] }, function (err, httpResponse, data) {      
-...      
-});      
+const response = await client.exportCSV({});
+console.log(response.body);
 ```      
       
-### Open track      
-``` js      
-var myClient = new OneSignal.Client({      
-    userAuthKey: 'XXXXXX',      
-    app: { appAuthKey: 'XXXXX', appId: 'XXXXX' }      
-});      
-      
-myClient.trackOpen('notificationId', { opened: true }, function (err, httpResponse, data) {      
-...      
-});      
-```      
+### Create Segment   
+   
+https://documentation.onesignal.com/reference#create-segments
+
+```ts
+.createSegment(body: CreateSegmentBody): Promise<ClientResponse>
+```  
+ 
+```js      
+const response = await client.createSegment({
+  name: 'new-segment',
+  filters: [..]
+});
+console.log(response.body);
+```         
+
+### Delete Segment   
+   
+https://documentation.onesignal.com/reference#delete-segments
+
+```ts
+.deleteSegment(segmentId: string): Promise<ClientResponse>
+```  
+ 
+```js      
+const response = await client.deleteSegment('segment-id1');
+console.log(response.body);
+```   
       
 ## Tests      
       
-Running all tests:      
+Running all tests, coverage, build:      
 ```bash      
-$ npm test      
+$ npm run test      
+$ npm run test-integration      
+$ npm run coverage      
+$ npm run build      
 ```      
 ## Contributing
 
@@ -471,10 +406,9 @@ $ npm test
 To send a pull request:  
  - Fork the repo  
  - Clone the forked repo on your computer  
- - Switch to develop branch  
+ - Switch to master branch  
  - Create a feature branch (`git checkout -b feature/new-feature-name`)  
  - Make your changes and add new tests if necessary  
- - Run tests using `npm test`  
  - Push your changes to your fork  
  - Open a pull request
 

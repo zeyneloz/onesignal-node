@@ -8,7 +8,13 @@
     <img src="https://img.shields.io/npm/dm/onesignal-node.svg" alt="Download Count" />
   </a>
   <a href="https://circleci.com/gh/zeyneloz/onesignal-node">
-      <img src="https://circleci.com/gh/zeyneloz/onesignal-node/tree/v3.x.svg?style=shield" alt="Build Status" />
+    <img src="https://circleci.com/gh/zeyneloz/onesignal-node/tree/v3.x.svg?style=shield" alt="Build Status" />
+  </a>
+  <a href="https://snyk.io/test/github/zeyneloz/onesignal-node?targetFile=package.json">
+    <img src="https://snyk.io/test/github/zeyneloz/onesignal-node/badge.svg?targetFile=package.json" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/zeyneloz/onesignal-node?targetFile=package.json" style="max-width:100%;">
+  </a>
+  <a href="https://codecov.io/gh/zeyneloz/onesignal-node">
+    <img src="https://codecov.io/gh/zeyneloz/onesignal-node/branch/master/graph/badge.svg" />
   </a>
 </p>
 <br>

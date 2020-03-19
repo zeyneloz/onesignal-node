@@ -259,4 +259,17 @@ export class Client {
     const uri = `${this.options.apiRoot}/${APPS_PATH}/${this.appId}/${APPS_SEGMENTS}/${segmentId}`;
     return basicAuthRequest(uri, 'DELETE', this.apiKey);
   }
+
+  /**
+     * Delete an existing device in one of your OneSignal apps.
+     * Reference: https://documentation.onesignal.com/docs/delete-users#section-api-deletion-requirements
+     *
+     * @param deviceId The device's OneSignal ID.
+     *
+     * @return {Promise<ClientResponse>} Http response of One Signal server.
+     */
+    deleteDevice(deviceId: string) {
+      const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${deviceId}?app_id=${this.appId}`;
+      return basicAuthRequest(uri, 'DELETE', this.apiKey);
+    }
 }

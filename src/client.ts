@@ -269,7 +269,7 @@ export class Client {
      * @return {Promise<ClientResponse>} Http response of One Signal server.
      */
     deleteDevice(deviceId: string) {
-      const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${deviceId}?app_id=${this.appId}`;
+      const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${deviceId}?${APP_ID_QUERY_NAME}=${this.appId}`;
       return basicAuthRequest(uri, 'DELETE', this.apiKey);
     }
 }

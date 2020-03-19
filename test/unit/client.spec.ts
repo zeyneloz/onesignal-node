@@ -350,8 +350,9 @@ describe('Client', () => {
 
       it('makes DELETE request with correct path and auth', async () => {
         await client.deleteDevice(deviceId);
-        const expectedPath = `${API_ROOT}/${DEVICES_PATH}/${deviceId}?app_id=${APP_ID}`;
+        const expectedPath = `${API_ROOT}/${DEVICES_PATH}/${deviceId}?${APP_ID_QUERY_NAME}=${APP_ID}`;
         expectRequestToBe(requestSpy, expectedPath, 'DELETE', APP_API_KEY);
+        expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID });
       });
     });
   });

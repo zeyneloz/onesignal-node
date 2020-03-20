@@ -213,6 +213,13 @@ export const editDeviceResponse = {
   },
 };
 
+export const deleteDeviceResponse = {
+  '200OK': {
+    status: 200,
+    response: { success: true, id: 'ffffb794-ba37-11e3-8077-031d62f86ebf' },
+  },
+};
+
 export const newSessionResponse = {
   '200OK': {
     status: 200,

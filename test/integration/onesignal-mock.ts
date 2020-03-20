@@ -36,6 +36,7 @@ const APP1_VIEW_DEVICES_PATH = `/${DEVICES_PATH}`;
 const APP1_VIEW_DEVICE1_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}`;
 const APP1_ADD_DEVICE_PATH = `/${DEVICES_PATH}`;
 const APP1_EDIT_DEVICE1_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}`;
+const APP1_DELETE_DEVICE1_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}`;
 const APP1_DEV1_NEW_SESSION_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}/${DEVICES_ONSESSION}`;
 const APP1_DEV1_NEW_PURCHASE_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}/${DEVICES_ONPURCHASE}`;
 const APP1_DEV1_INCREMENT_SESSION_LENGTH_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}/${DEVICES_ONFOCUS}`;
@@ -134,6 +135,11 @@ nock(MOCKED_API_HOST, app1NockOptions)
 nock(MOCKED_API_HOST, app1NockOptions)
   .put(APP1_EDIT_DEVICE1_PATH, expectAppIdInBody(APP1.appId))
   .reply(response.editDeviceResponse['200OK'].status, response.editDeviceResponse['200OK'].response)
+  .persist();
+
+nock(MOCKED_API_HOST, app1NockOptions)
+  .put(APP1_DELETE_DEVICE1_PATH, expectAppIdInQuery(APP1.appId))
+  .reply(response.deleteDeviceResponse['200OK'].status, response.deleteDeviceResponse['200OK'].response)
   .persist();
 
 nock(MOCKED_API_HOST, app1NockOptions)

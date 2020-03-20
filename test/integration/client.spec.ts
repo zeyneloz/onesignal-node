@@ -159,8 +159,8 @@ describe('Test Client for (APP1, MOCKED_API_HOST)', () => {
   describe('(deleteDevice)', () => {
     it('returns 200 OK and correct response', async () => {
       const resp = await client.deleteDevice(APP1_DEVICE1);
-      expect(resp.statusCode).to.be.equal(response.editDeviceResponse['200OK'].status);
-      expect(resp.body).to.be.eql(response.editDeviceResponse['200OK'].response);
+      expect(resp.statusCode).to.be.equal(response.deleteDeviceResponse['200OK'].status);
+      expect(resp.body).to.be.eql(response.deleteDeviceResponse['200OK'].response);
     });
   });
 });

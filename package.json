@@ -19,7 +19,9 @@
     "test": "./node_modules/.bin/mocha -r ts-node/register 'test/unit/**/*.spec.ts'",
     "test-integration": "./node_modules/.bin/mocha -r ts-node/register 'test/integration/**/*.spec.ts'",
     "coverage": "./node_modules/.bin/nyc --reporter=lcov npm run test",
-    "update-codecov": "./node_modules/.bin/codecov"
+    "update-codecov": "./node_modules/.bin/codecov",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -76,6 +78,8 @@
   },
   "dependencies": {
     "request": "^2.88.0",
-    "request-promise": "^4.2.5"
-  }
+    "request-promise": "^4.2.5",
+    "snyk": "^1.319.1"
+  },
+  "snyk": true
 }

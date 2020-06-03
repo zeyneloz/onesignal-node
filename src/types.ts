@@ -1,6 +1,6 @@
 export interface ClientResponse {
   statusCode: number;
-  body: {};
+  body: any;
   headers: { [key: string]: any };
 }
 

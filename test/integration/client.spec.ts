@@ -155,6 +155,14 @@ describe('Test Client for (APP1, MOCKED_API_HOST)', () => {
       expect(resp.body).to.be.eql(response.deleteSegmentResponse['200OK'].response);
     });
   });
+
+  describe('(deleteDevice)', () => {
+    it('returns 200 OK and correct response', async () => {
+      const resp = await client.deleteDevice(APP1_DEVICE1);
+      expect(resp.statusCode).to.be.equal(response.deleteDeviceResponse['200OK'].status);
+      expect(resp.body).to.be.eql(response.deleteDeviceResponse['200OK'].response);
+    });
+  });
 });
 
 describe('Test Client for (APP1, MOCKED_FAILING_400_API_HOST)', () => {

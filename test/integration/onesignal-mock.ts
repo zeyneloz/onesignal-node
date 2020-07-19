@@ -138,7 +138,8 @@ nock(MOCKED_API_HOST, app1NockOptions)
   .persist();
 
 nock(MOCKED_API_HOST, app1NockOptions)
-  .put(APP1_DELETE_DEVICE1_PATH, expectAppIdInQuery(APP1.appId))
+  .delete(APP1_DELETE_DEVICE1_PATH)
+  .query(expectAppIdInQuery(APP1.appId))
   .reply(response.deleteDeviceResponse['200OK'].status, response.deleteDeviceResponse['200OK'].response)
   .persist();
 

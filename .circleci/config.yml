@@ -82,4 +82,4 @@ workflows:
               only: /^v.*/
             branches:
               only:
-                - /^v.*/
+                - master

@@ -38,6 +38,9 @@ export class Client {
   public options: Options;
 
   constructor(appId: string, apiKey: string, options?: ClientOptions) {
+    if (appId.length <= 0 && apiKey.length <= 0) {
+      throw new Error('Cannot initialize OneSignal Client please verify your app id and key.');
+    }
     this.appId = appId;
     this.apiKey = apiKey;
 

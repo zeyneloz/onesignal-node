@@ -32,8 +32,8 @@ interface KeyAnyObject {
   [key: string]: any;
 }
 
-interface KeyStringObject {
-  [key: string]: string;
+interface TagObject {
+  [key: string]: boolean | number | string;
 }
 
 export interface CreateNotificationBody {
@@ -175,7 +175,7 @@ interface BaseDeviceBody {
   ad_id?: string;
   sdk?: string;
   session_count?: number;
-  tags?: KeyStringObject;
+  tags?: TagObject;
   amount_spent?: string;
   created_at?: number;
   playtime?: number;

@@ -115,7 +115,7 @@ const userClient = new OneSignal.UserClient('userAuthKey', { apiRoot: 'https://o
 
 ### Create notification      
 
-https://documentation.onesignal.com/reference#create-notification  
+https://documentation.onesignal.com/reference/create-notification 
 
 ```ts
 .createNotification(body: CreateNotificationBody): Promise<ClientResponse>
@@ -124,7 +124,7 @@ https://documentation.onesignal.com/reference#create-notification
 Please read the sections above to learn how to create a `Client` object.
 
 ```js      
-// See all fields: https://documentation.onesignal.com/reference#create-notification
+// See all fields: https://documentation.onesignal.com/reference/create-notification
 const notification = {
   contents: {
     'tr': 'Yeni bildirim',
@@ -156,7 +156,7 @@ client.createNotification(notification)
     
 ### Cancel notification   
 
-https://documentation.onesignal.com/reference#cancel-notification  
+https://documentation.onesignal.com/reference/cancel-notification
 
 ```ts
 .cancelNotification(notificationId: string): Promise<ClientResponse>
@@ -171,7 +171,7 @@ console.log(response.statusCode);
       
 ### View notifications      
 
-https://documentation.onesignal.com/reference#view-notifications  
+https://documentation.onesignal.com/reference/view-notifications
 
 ```ts
 .viewNotifications(query?: ViewNotificationsQuery): Promise<ClientResponse>
@@ -188,7 +188,7 @@ const response = await client.viewNotifications({ limit:10, kind: 2, offset: 2 }
       
 ### View notification      
 
-https://documentation.onesignal.com/reference#view-notification  
+https://documentation.onesignal.com/reference/view-notification
 
 ```ts
 .viewNotification(notificationId: string): Promise<ClientResponse>
@@ -201,7 +201,7 @@ console.log(response.body);
       
 ### View apps   
 
-https://documentation.onesignal.com/reference#view-apps-apps  
+https://documentation.onesignal.com/reference/view-apps-apps 
 
 You should use `UserClient` for view apps since it requires User Auth Key  
    
@@ -216,7 +216,7 @@ console.log(response.body);
       
 ### Create an app      
 
-https://documentation.onesignal.com/reference#create-an-app
+https://documentation.onesignal.com/reference/create-an-app
 
 You should use `UserClient` for view apps since it requires User Auth Key  
    
@@ -231,7 +231,7 @@ console.log(response.body);
       
 ### Update an app      
 
-https://documentation.onesignal.com/reference#update-an-app
+https://documentation.onesignal.com/reference/update-an-app
 
 You should use `UserClient` for view apps since it requires User Auth Key  
    
@@ -246,7 +246,7 @@ console.log(response.body);
       
 ### View devices      
 
-https://documentation.onesignal.com/reference#view-devices  
+https://documentation.onesignal.com/reference/view-devices
 
 ```ts
 .viewDevices(query?: LimitOffsetQuery): Promise<ClientResponse>
@@ -260,7 +260,7 @@ console.log(response.body);
       
 ### View device   
    
-https://documentation.onesignal.com/reference#view-device 
+https://documentation.onesignal.com/reference/view-device
 
 ```ts
 .viewDevice(identifier: string): Promise<ClientResponse>
@@ -273,7 +273,7 @@ console.log(response.body);
       
 ### Add a device      
    
-https://documentation.onesignal.com/reference#add-a-device  
+https://documentation.onesignal.com/reference/add-a-device 
 
 ```ts
 .addDevice(body: AddDeviceBody): Promise<ClientResponse>
@@ -289,7 +289,7 @@ console.log(response.body);
       
 ### Edit a device      
    
-https://documentation.onesignal.com/reference#edit-device  
+https://documentation.onesignal.com/reference/edit-device
 
 ```ts
 .editDevice(deviceId: string, body: EditDeviceBody): Promise<ClientResponse>
@@ -304,7 +304,7 @@ console.log(response.body);
   
 ### New Session     
    
-https://documentation.onesignal.com/reference#new-session 
+https://documentation.onesignal.com/reference/new-session
 
 ```ts
 .newSession(deviceId: string, body: NewSessionBody): Promise<ClientResponse>
@@ -319,7 +319,7 @@ console.log(response.body);
   
 ### New Purchase  
    
-https://documentation.onesignal.com/reference#new-purchase
+https://documentation.onesignal.com/reference/new-purchase
 
 ```ts
 .newPurchase(deviceId: string, body: NewPurchaseBody): Promise<ClientResponse>
@@ -350,7 +350,7 @@ console.log(response.body);
   
 ### CSV Export      
    
-https://documentation.onesignal.com/reference#csv-export
+https://documentation.onesignal.com/reference/csv-export
 
 ```ts
 .exportCSV(body: ExportCSVBody): Promise<ClientResponse>
@@ -363,7 +363,7 @@ console.log(response.body);
       
 ### Create Segment   
    
-https://documentation.onesignal.com/reference#create-segments
+https://documentation.onesignal.com/reference/create-segments
 
 ```ts
 .createSegment(body: CreateSegmentBody): Promise<ClientResponse>
@@ -379,7 +379,7 @@ console.log(response.body);
 
 ### Delete Segment   
    
-https://documentation.onesignal.com/reference#delete-segments
+https://documentation.onesignal.com/reference/delete-segments
 
 ```ts
 .deleteSegment(segmentId: string): Promise<ClientResponse>

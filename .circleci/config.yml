@@ -78,7 +78,7 @@ workflows:
             - test_and_build
             - integration_test
           filters:
-            tags:
-              only: /^v.*/
             branches:
               ignore: /.*/
+            tags:
+              only: /^v[0-9]+(\.[0-9]+)*$/

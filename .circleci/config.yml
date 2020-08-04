@@ -71,8 +71,14 @@ workflows:
   version: 2
   test-build-deploy:
     jobs:
-      - test_and_build
-      - integration_test
+      - test_and_build:
+          filters:
+            tags:
+              only: /^v.*/
+      - integration_test:
+          filters:
+            tags:
+              only: /^v.*/
       - deploy:
           requires:
             - test_and_build

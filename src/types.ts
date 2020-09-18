@@ -103,7 +103,7 @@ export interface CreateNotificationBody {
   android_visibility?: number;
   ios_badgeType?: string;
   ios_badgeCount?: number;
-  collapse_id?: number;
+  collapse_id?: string;
   apns_alert?: KeyAnyObject;
 
   // Delivery

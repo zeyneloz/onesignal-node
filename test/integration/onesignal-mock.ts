@@ -142,7 +142,10 @@ nock(MOCKED_API_HOST, app1NockOptions)
 
 nock(MOCKED_API_HOST, app1NockOptions)
   .put(APP1_EDIT_TAGS_WITH_EXTERNAL_USER_ID_PATH, expectAppIdInBody(APP1.appId))
-  .reply(response.editTagsWithExternalUserIdResponse['200OK'].status, response.editTagsWithExternalUserIdResponse['200OK'].response)
+  .reply(
+    response.editTagsWithExternalUserIdResponse['200OK'].status,
+    response.editTagsWithExternalUserIdResponse['200OK'].response,
+  )
   .persist();
 
 nock(MOCKED_API_HOST, app1NockOptions)

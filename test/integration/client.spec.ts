@@ -108,7 +108,9 @@ describe('Test Client for (APP1, MOCKED_API_HOST)', () => {
 
   describe('(editTagsWithExternalUserId)', () => {
     it('returns 200 OK and correct response', async () => {
-      const resp = await client.editTagsWithExternalUserIdDevice(APP1_EXTERNAL_USER_ID1, { tags: {customTag: "custom"} });
+      const resp = await client.editTagsWithExternalUserIdDevice(APP1_EXTERNAL_USER_ID1, {
+        tags: { customTag: 'custom' },
+      });
       expect(resp.statusCode).to.be.equal(response.editTagsWithExternalUserIdResponse['200OK'].status);
       expect(resp.body).to.be.eql(response.editTagsWithExternalUserIdResponse['200OK'].response);
     });

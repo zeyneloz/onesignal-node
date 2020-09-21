@@ -235,7 +235,7 @@ describe('Client', () => {
       const externalUserId = 'external-user-id-1';
       const postBody = {
         tags: {
-          customTag: "1"
+          customTag: '1',
         },
       };
 

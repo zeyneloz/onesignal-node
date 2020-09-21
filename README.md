@@ -39,7 +39,8 @@ Please see [this page](https://github.com/zeyneloz/onesignal-node/tree/v2.x) for
   * [View devices](#view-devices)      
   * [View device](#view-device)      
   * [Add a device](#add-a-device)      
-  * [Edit a device](#edit-a-device)      
+  * [Edit a device](#edit-a-device)
+  * [Edit tags with external user id](#edit-tags-with-external-user-id)
   * [New session](#new-session)  
   * [New purchase](#new-purchase)  
   * [Increment Session Length](#increment-session-length)  
@@ -301,7 +302,24 @@ const response = await client.editDevice('device-id',{
 });
 console.log(response.body);
 ```     
-  
+
+### Edit tags with external user id
+   
+https://documentation.onesignal.com/reference/edit-tags-with-external-user-id
+
+```ts
+.editTagsWithExternalUserId(externalUserId: string, body: EditTagsBody): Promise<ClientResponse>
+```  
+ 
+```js      
+const response = await client.editTagsWithExternalUserId('external-user-id', {
+  tags: {
+    customTag: "customValue"
+  },
+});
+console.log(response.body);
+```     
+
 ### New Session     
    
 https://documentation.onesignal.com/reference/new-session

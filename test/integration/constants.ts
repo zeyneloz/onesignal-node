@@ -6,3 +6,4 @@ export const MOCKED_FAILING_400_API_HOST = 'https://failin-host';
 export const APP1_NOTIFICATION1 = 'app1-notification1-id';
 export const APP1_DEVICE1 = 'app1-device1-id';
 export const APP1_SEGMENT1 = 'app1-segment1-id';
+export const APP1_EXTERNAL_USER_ID1 = 'app1-external_user-id1';

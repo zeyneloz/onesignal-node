@@ -195,6 +195,10 @@ export interface AddDeviceBody extends BaseDeviceBody {
 
 export interface EditDeviceBody extends BaseDeviceBody {}
 
+export interface EditTagsBody {
+  tags: TagObject;
+}
+
 export interface NewSessionBody {
   identifier?: string;
   language?: string;

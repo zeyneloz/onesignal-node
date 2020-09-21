@@ -8,6 +8,7 @@ import {
   APP1_DEVICE1,
   APP1_NOTIFICATION1,
   APP1_SEGMENT1,
+  APP1_EXTERNAL_USER_ID1,
   MOCKED_API_HOST,
   MOCKED_FAILING_400_API_HOST,
   USER_AUTH_KEY,
@@ -17,6 +18,7 @@ import {
   APP_ID_QUERY_NAME,
   APPS_PATH,
   APPS_SEGMENTS,
+  APPS_USERS,
   DEVICES_CSVEXPORT,
   DEVICES_ONFOCUS,
   DEVICES_ONPURCHASE,
@@ -36,6 +38,7 @@ const APP1_VIEW_DEVICES_PATH = `/${DEVICES_PATH}`;
 const APP1_VIEW_DEVICE1_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}`;
 const APP1_ADD_DEVICE_PATH = `/${DEVICES_PATH}`;
 const APP1_EDIT_DEVICE1_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}`;
+const APP1_EDIT_TAGS_WITH_EXTERNAL_USER_ID_PATH = `/${APPS_PATH}/${APP1.appId}/${APPS_USERS}/${APP1_EXTERNAL_USER_ID1}`;
 const APP1_DELETE_DEVICE1_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}`;
 const APP1_DEV1_NEW_SESSION_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}/${DEVICES_ONSESSION}`;
 const APP1_DEV1_NEW_PURCHASE_PATH = `/${DEVICES_PATH}/${APP1_DEVICE1}/${DEVICES_ONPURCHASE}`;
@@ -135,6 +138,11 @@ nock(MOCKED_API_HOST, app1NockOptions)
 nock(MOCKED_API_HOST, app1NockOptions)
   .put(APP1_EDIT_DEVICE1_PATH, expectAppIdInBody(APP1.appId))
   .reply(response.editDeviceResponse['200OK'].status, response.editDeviceResponse['200OK'].response)
+  .persist();
+
+nock(MOCKED_API_HOST, app1NockOptions)
+  .put(APP1_EDIT_TAGS_WITH_EXTERNAL_USER_ID_PATH, expectAppIdInBody(APP1.appId))
+  .reply(response.editTagsWithExternalUserIdResponse['200OK'].status, response.editTagsWithExternalUserIdResponse['200OK'].response)
   .persist();
 
 nock(MOCKED_API_HOST, app1NockOptions)

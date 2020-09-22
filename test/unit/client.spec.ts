@@ -16,6 +16,7 @@ import {
   DEVICES_CSVEXPORT,
   APPS_PATH,
   APPS_SEGMENTS,
+  APPS_USERS,
   APP_ID_FIELD_NAME,
   APP_ID_QUERY_NAME,
 } from '../../src/constants';
@@ -226,6 +227,31 @@ describe('Client', () => {
 
       it('makes request with given body', async () => {
         await client.editDevice(deviceId, postBody);
+        expectRequestBodyToHave(requestSpy, postBody);
+      });
+    });
+
+    describe('.editTagsWithExternalUserIdDevice', () => {
+      const externalUserId = 'external-user-id-1';
+      const postBody = {
+        tags: {
+          customTag: '1',
+        },
+      };
+
+      it('makes PUT request with correct path and auth', async () => {
+        await client.editTagsWithExternalUserIdDevice(externalUserId, postBody);
+        const expectedPath = `${API_ROOT}/${APPS_PATH}/${APP_ID}/${APPS_USERS}/${externalUserId}`;
+        expectRequestToBe(requestSpy, expectedPath, 'PUT', APP_API_KEY);
+      });
+
+      it('includes app_id in request body', async () => {
+        await client.editTagsWithExternalUserIdDevice(externalUserId, postBody);
+        expectRequestBodyToHave(requestSpy, { [APP_ID_FIELD_NAME]: APP_ID });
+      });
+
+      it('makes request with given body', async () => {
+        await client.editTagsWithExternalUserIdDevice(externalUserId, postBody);
         expectRequestBodyToHave(requestSpy, postBody);
       });
     });

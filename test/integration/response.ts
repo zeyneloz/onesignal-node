@@ -213,6 +213,13 @@ export const editDeviceResponse = {
   },
 };
 
+export const editTagsWithExternalUserIdResponse = {
+  '200OK': {
+    status: 200,
+    response: { success: true },
+  },
+};
+
 export const deleteDeviceResponse = {
   '200OK': {
     status: 200,

@@ -7,6 +7,7 @@ import * as response from './response';
 import {
   APP1,
   APP1_DEVICE1,
+  APP1_EXTERNAL_USER_ID1,
   APP1_NOTIFICATION1,
   APP1_SEGMENT1,
   MOCKED_API_HOST,
@@ -102,6 +103,16 @@ describe('Test Client for (APP1, MOCKED_API_HOST)', () => {
       const resp = await client.editDevice(APP1_DEVICE1, { ad_id: '1204' });
       expect(resp.statusCode).to.be.equal(response.editDeviceResponse['200OK'].status);
       expect(resp.body).to.be.eql(response.editDeviceResponse['200OK'].response);
+    });
+  });
+
+  describe('(editTagsWithExternalUserId)', () => {
+    it('returns 200 OK and correct response', async () => {
+      const resp = await client.editTagsWithExternalUserIdDevice(APP1_EXTERNAL_USER_ID1, {
+        tags: { customTag: 'custom' },
+      });
+      expect(resp.statusCode).to.be.equal(response.editTagsWithExternalUserIdResponse['200OK'].status);
+      expect(resp.body).to.be.eql(response.editTagsWithExternalUserIdResponse['200OK'].response);
     });
   });
 

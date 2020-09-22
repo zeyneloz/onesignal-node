@@ -3,6 +3,7 @@ export const NOTIFICATIONS_PATH = 'notifications';
 export const NOTIFICATIONS_HISTORY = 'history';
 export const APPS_PATH = 'apps';
 export const APPS_SEGMENTS = 'segments';
+export const APPS_USERS = 'users';
 export const DEVICES_PATH = 'players';
 export const DEVICES_ONSESSION = 'on_session';
 export const DEVICES_ONPURCHASE = 'on_purchase';

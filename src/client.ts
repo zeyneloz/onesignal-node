@@ -3,6 +3,7 @@ import {
   NOTIFICATIONS_PATH,
   DEVICES_PATH,
   APPS_PATH,
+  APPS_USERS,
   NOTIFICATIONS_HISTORY,
   DEVICES_ONSESSION,
   DEVICES_ONPURCHASE,
@@ -30,6 +31,7 @@ import {
   IncrementSessionLengthBody,
   ExportCSVBody,
   CreateSegmentBody,
+  EditTagsBody,
 } from './types';
 
 export class Client {
@@ -170,6 +172,22 @@ export class Client {
     // eslint-disable-next-line @typescript-eslint/camelcase
     const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
     const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${deviceId}`;
+    return basicAuthRequest(uri, 'PUT', this.apiKey, postBody);
+  }
+
+  /**
+   * Update an existing device's tags in one of your OneSignal apps using the External User ID.
+   * Reference: https://documentation.onesignal.com/reference/edit-tags-with-external-user-id
+   *
+   * @param external_user_id The External User ID.
+   * @param {EditTagsBody} body Request body.
+   *
+   * @return {Promise<ClientResponse>} Http response of One Signal server.
+   */
+  public editTagsWithExternalUserIdDevice(externalUserId: string, body: EditTagsBody): Promise<ClientResponse> {
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
+    const uri = `${this.options.apiRoot}/${APPS_PATH}/${this.appId}/${APPS_USERS}/${externalUserId}`;
     return basicAuthRequest(uri, 'PUT', this.apiKey, postBody);
   }
 

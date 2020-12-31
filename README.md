@@ -308,11 +308,11 @@ console.log(response.body);
 https://documentation.onesignal.com/reference/edit-tags-with-external-user-id
 
 ```ts
-.editTagsWithExternalUserId(externalUserId: string, body: EditTagsBody): Promise<ClientResponse>
+.editTagsWithExternalUserIdDevice(externalUserId: string, body: EditTagsBody): Promise<ClientResponse>
 ```  
  
 ```js      
-const response = await client.editTagsWithExternalUserId('external-user-id', {
+const response = await client.editTagsWithExternalUserIdDevice('external-user-id', {
   tags: {
     customTag: "customValue"
   },

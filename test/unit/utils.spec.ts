@@ -83,16 +83,11 @@ describe('utils', () => {
         id: 0,
       },
     ];
-    const notFoundResponse: [number, {}] = [
-      404,
-      {
-        found: false,
-      },
-    ];
+    const notFoundResponse: [number, string] = [404, 'not found'];
     const internalServerResponse: [number, {}] = [
       500,
       {
-        found: false,
+        error: 'Some internal error',
       },
     ];
 
@@ -169,17 +164,21 @@ describe('utils', () => {
 
     it('rejects with HTTP error when 404 is returned from server', async () => {
       const promise = basicAuthRequest(notFoundRequestUrl, 'GET', authKey);
-      await expect(promise).to.be.rejectedWith(HTTPError);
+      await expect(promise)
+        .to.be.eventually.rejectedWith(HTTPError)
+        .and.have.property('body', notFoundResponse[1]);
     });
 
-    it('rejects with HTTP error when 500 is returned from server', async () => {
+    it('rejects with correct HTTP error when 500 is returned from server', async () => {
       const promise = basicAuthRequest(internalServerRequestUrl, 'GET', authKey);
-      await expect(promise).to.be.rejectedWith(HTTPError);
+      await expect(promise)
+        .to.be.eventually.rejectedWith(HTTPError)
+        .and.have.property('body', JSON.stringify(internalServerResponse[1]));
     });
 
     it('rejects with ERROR when request fails with an error', async () => {
       const promise = basicAuthRequest(coreErrorRequestUrl, 'GET', authKey);
-      await expect(promise).to.be.rejectedWith(Error);
+      await expect(promise).to.be.eventually.rejectedWith(Error);
     });
   });
 });

@@ -37,6 +37,25 @@ export const jsonToQueryString = (obj: { [key: string]: any } = {}): string => {
 };
 
 /**
+ * Return string representation of given object.
+ *
+ * @param inputObj {any} Input object
+ *
+ * @return {string}
+ */
+const anyToString = function convertAnyToString(inputObj: any): string {
+  if (inputObj === undefined) {
+    return 'undefined';
+  }
+
+  if (typeof inputObj === 'string') {
+    return inputObj;
+  }
+
+  return JSON.stringify(inputObj);
+};
+
+/**
  * Make a request using given options and return the response if status code is 2xx.
  * Otherwise, reject with HTTPError.
  *
@@ -53,7 +72,7 @@ const makeRequest = function makeHTTPRequest(options: request.Options): Promise<
 
       // Check if status code is 2xx.
       if (httpResponse.statusCode - 299 > 0) {
-        return reject(new HTTPError(httpResponse.statusCode, httpResponse.body));
+        return reject(new HTTPError(httpResponse.statusCode, anyToString(httpResponse.body)));
       }
 
       return resolve(httpResponse.toJSON());

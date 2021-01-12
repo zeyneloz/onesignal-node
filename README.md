@@ -44,7 +44,8 @@ Please see [this page](https://github.com/zeyneloz/onesignal-node/tree/v2.x) for
   * [New session](#new-session)  
   * [New purchase](#new-purchase)  
   * [Increment Session Length](#increment-session-length)  
-  * [CSV Export](#csv-export)      
+  * [CSV Export](#csv-export)        
+  * [Identity verification](#identity-verification)      
 * [Tests](#tests)
 * [Contributing](#contributing)
       
@@ -407,6 +408,19 @@ https://documentation.onesignal.com/reference/delete-segments
 const response = await client.deleteSegment('segment-id1');
 console.log(response.body);
 ```   
+
+### Identity Verification
+
+https://documentation.onesignal.com/docs/identity-verification
+
+You can use these simple helpers to sign user id or email to be used in client-side code.
+
+```ts
+.signUserExternalId(id: string | number): string
+.signUserEmail(email: string): string
+```  
+ 
+Each of these will return SHA-256 hash, that was generated using apiKey.
       
 ## Tests      
       

@@ -14,7 +14,7 @@ import {
   APP_ID_FIELD_NAME,
 } from './constants';
 
-import { stripTrailingSlash, jsonToQueryString, basicAuthRequest } from './utils';
+import { stripTrailingSlash, jsonToQueryString, basicAuthRequest, signStringWithKey } from './utils';
 
 import {
   ClientOptions,
@@ -289,5 +289,29 @@ export class Client {
   public deleteDevice(deviceId: string): Promise<ClientResponse> {
     const uri = `${this.options.apiRoot}/${DEVICES_PATH}/${deviceId}?${APP_ID_QUERY_NAME}=${this.appId}`;
     return basicAuthRequest(uri, 'DELETE', this.apiKey);
+  }
+
+  /**
+   * Sign user external id using client REST key to use on the client-side code
+   * Reference: https://documentation.onesignal.com/docs/identity-verification
+   *
+   * @param {string} id User id to be signed
+   *
+   * @return {string} Signed user external id
+   */
+  public signUserExternalId(id: string | number): string {
+    return signStringWithKey(id.toString(), this.apiKey);
+  }
+
+  /**
+   * Sign user email using client REST key to use on the client-side code
+   * Reference: https://documentation.onesignal.com/docs/identity-verification
+   *
+   * @param {string} email Email to be signed
+   *
+   * @return {string} Signed email
+   */
+  public signUserEmail(email: string): string {
+    return signStringWithKey(email, this.apiKey);
   }
 }

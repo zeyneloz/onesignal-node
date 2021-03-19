@@ -65,6 +65,10 @@ npm install onesignal-node --save
 ``` js      
 const OneSignal = require('onesignal-node');    
 ```      
+OR
+``` js      
+import * as OneSignal from 'onesignal-node';  
+```
 
 ### Client Types:
 

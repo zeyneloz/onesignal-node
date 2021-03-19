@@ -381,5 +381,19 @@ describe('Client', () => {
         expectRequestParamsToHave(requestSpy, { [APP_ID_QUERY_NAME]: APP_ID });
       });
     });
+
+    describe('.signUserExternalId', () => {
+      it('should generate valid hash', async () => {
+        const hash = client.signUserExternalId(1);
+        expect(hash).to.be.eql('7741154c0b649b9ce9f8983f53e34003ca6ddb22fb97be5555be1975e27b4da9');
+      });
+    });
+
+    describe('.signUserEmail', () => {
+      it('should generate valid hash', async () => {
+        const hash = client.signUserEmail('test@domain.com');
+        expect(hash).to.be.eql('5f71453f41c608f0a8ba78292a9c9683527db00408abc0e627f1637c7d3f2b53');
+      });
+    });
   });
 });

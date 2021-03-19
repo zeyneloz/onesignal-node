@@ -1,3 +1,4 @@
+import { createHmac } from 'crypto';
 import * as request from 'request';
 
 import { HTTPError } from './errors';
@@ -111,4 +112,18 @@ export const basicAuthRequest = function basicAuthHTTPRequest(
   }
 
   return makeRequest(options);
+};
+
+/**
+ * Sign any string payload using specified private key
+ * Reference: https://documentation.onesignal.com/docs/identity-verification#auth-hash-generation
+ *
+ * @param {string} payload String to be signed
+ * @param {string} key Private REST key
+ * @return {string} Signed payload
+ */
+export const signStringWithKey = function signStringWithKey(payload: string, key: string): string {
+  const hmac = createHmac('sha256', key);
+  hmac.update(payload);
+  return hmac.digest('hex');
 };

@@ -96,6 +96,7 @@ export const basicAuthRequest = function basicAuthHTTPRequest(
   method: string,
   authKey: string,
   body?: {},
+  customOptions?: Partial<request.Options>,
 ): Promise<request.ResponseAsJSON> {
   const options: request.Options = {
     uri,
@@ -105,6 +106,7 @@ export const basicAuthRequest = function basicAuthHTTPRequest(
       Authorization: `Basic ${authKey}`,
     },
     json: true,
+    ...customOptions,
   };
 
   if (body) {

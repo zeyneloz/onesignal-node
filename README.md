@@ -20,8 +20,6 @@
 <br>
 
 A Node.js client library for [OneSignal](https://onesignal.com/) API.  
-**IMPORTANT:** This documentation belongs to v3.x.x which has no backward compatibility.
-Please see [this page](https://github.com/zeyneloz/onesignal-node/tree/v2.x) for v2.x.x.  
       
 ## Table of Contents      
 * [Overview](#overview)

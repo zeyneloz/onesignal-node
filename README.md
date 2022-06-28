@@ -122,7 +122,7 @@ const userClient = new OneSignal.UserClient('userAuthKey', { apiRoot: 'https://o
 https://documentation.onesignal.com/reference/create-notification 
 
 ```ts
-.createNotification(body: CreateNotificationBody): Promise<ClientResponse>
+.createNotification(body: CreateNotificationBody, customOptions?: ): Promise<ClientResponse>
 ```
 
 Please read the sections above to learn how to create a `Client` object.
@@ -140,9 +140,13 @@ const notification = {
   ]
 };
 
+const customOptions = {
+  timeout: 7000,
+}
+
 // using async/await
 try {
-  const response = await client.createNotification(notification);
+  const response = await client.createNotification(notification, customOptions);
   console.log(response.body.id);
 } catch (e) {
   if (e instanceof OneSignal.HTTPError) {

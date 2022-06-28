@@ -34,6 +34,8 @@ import {
   EditTagsBody,
 } from './types';
 
+import { Options as requestOptions } from 'request';
+
 export class Client {
   public appId: string;
   public apiKey: string;
@@ -54,11 +56,11 @@ export class Client {
    * @param {CreateNotificationBody} body Request body.
    * @returns {Promise<Response>} Http response of One Signal server.
    */
-  public createNotification(body: CreateNotificationBody): Promise<ClientResponse> {
+  public createNotification(body: CreateNotificationBody, customOptions?: Partial<requestOptions>): Promise<ClientResponse> {
     // eslint-disable-next-line @typescript-eslint/camelcase
     const postBody = { ...{ [APP_ID_FIELD_NAME]: this.appId }, ...body };
     const uri = `${this.options.apiRoot}/${NOTIFICATIONS_PATH}`;
-    return basicAuthRequest(uri, 'POST', this.apiKey, postBody);
+    return basicAuthRequest(uri, 'POST', this.apiKey, postBody, customOptions);
   }
 
   /**

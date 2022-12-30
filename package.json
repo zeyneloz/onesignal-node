@@ -63,7 +63,7 @@
     "eslint-plugin-json": "^2.1.2",
     "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-react": "^7.30.1",
-    "mocha": "^6.2.3",
+    "mocha": "^10.2.0",
     "nock": "^11.9.1",
     "nyc": "^14.1.1",
     "prettier": "^1.19.1",

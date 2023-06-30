@@ -44,6 +44,7 @@ export interface CreateNotificationBody {
   template_id?: string;
   content_available?: boolean;
   mutable_content?: boolean;
+  custom_data?: KeyAnyObject;
 
   // Email content
   email_subject?: string;
